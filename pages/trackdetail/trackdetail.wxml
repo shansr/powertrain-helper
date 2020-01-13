@@ -1,0 +1,37 @@
+<!--pages/trackdetail/trackdetail.wxml-->
+<!-- <text>pages/trackdetail/trackdetail.wxml</text> -->
+
+<!-- 历史轨迹地图区域 -->
+<view class="page-body">
+  <view class="page-section map-area">
+    <map id="myMap" style="width: 100%; height: 600rpx;" latitude="{{latitude}}" longitude="{{longitude}}" polyline="{{polyline}}" markers="{{markers}}" show-location>
+    </map>
+  </view>
+
+  <!-- 历史工况信息区域 -->
+  <view class='data-area'>
+    <view>
+      <text>车牌号码：{{carNumber}}</text>
+    </view>
+    <view>
+      <text>{{detailInfo.startTime}}-->{{detailInfo.endTime}}</text>
+    </view>
+    <view>
+      <text wx:if="{{isGps}}">{{detailInfo.startAddress}}-->{{detailInfo.endAddress}}</text>
+      <text wx:else>当前驾驶循环无地理位置信息</text>
+    </view>
+    <view class='detailData'>
+      <view>
+        <text>soc变化范围（%） ：{{detailInfo.socChange}}</text>
+      </view>
+      <!-- <view><text>总能耗（kg）：{{detailInfo.totalEnergyConsumption}}</text></view> -->
+      <view>
+        <text>总里程（km）: {{detailInfo.mileage}}</text>
+      </view>
+      <view>
+        <text>总工时（h）: {{detailInfo.sumHour}}</text>
+      </view>
+      <!-- <view><text>百公里能耗率（kg/100km）：{{detailInfo.hundredAveEnergyConsumption}}</text></view> -->
+    </view>
+  </view>
+</view>

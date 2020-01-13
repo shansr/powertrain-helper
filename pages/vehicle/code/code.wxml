@@ -1,0 +1,11 @@
+<!--pages/vehicle/code/code.wxml-->
+<i-panel title="激活码">
+    <i-input type="text" placeholder="请输入激活码" maxlength="50" bind:change="codeInputChange"/>
+</i-panel>
+<i-button bind:click="handleActive" type="primary" shape="circle" data-code="{{inputCode}}">提交</i-button>
+<!-- <i-panel title="已激活" wx-if="{{ activeCodes != null && activeCodes.length != 0}}">
+  <i-cell-group>
+    <i-cell wx:for="{{activeCodes}}" wx:for-index="index" wx:for-item="item" wx:key="key" title="{{item}}">
+    </i-cell>
+  </i-cell-group>
+</i-panel> -->

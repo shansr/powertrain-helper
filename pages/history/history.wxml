@@ -1,0 +1,38 @@
+<!--pages/history/history.wxml-->
+<!-- <view class='carIDstyle'>车辆标识：{{carID}}</view> -->
+<!-- 查询区 -->
+<i-panel class='dateSelect'>
+<view class="carNumber"><text>车牌号码：{{carNumber}}</text></view>
+  <view>
+    <button bindtap="pickerShow" style="width:90vw;margin-top:20rpx">选择时间</button>
+  </view>
+  <view style="text-align:center;margin-top:20rpx">
+    <view wx:if="{{startTime}}">
+      开始时间：{{startTime}}
+    </view>
+    <view wx:if="{{endTime}}">
+      结束时间：{{endTime}}
+    </view>
+  </view>
+
+  <time-picker pickerShow="{{isPickerShow}}" id="picker" wx:if="{{isPickerRender}}" bind:hidePicker="pickerHide" bind:setPickerTime="setPickerTime" config="{{pickerConfig}}"></time-picker>
+  <i-button type="primary" bind:tap="handleHistoryClick" data-startTime="{{startTime}}" data-endTime="{{endTime}}">查询</i-button>
+</i-panel>
+
+
+<!-- 列表展示区 -->
+<view class="listStyle">
+  <view wx:for="{{historyLists}}" wx:for-index="index" wx:for-item="item" wx:key="key">
+    <view class="item" bindtap="trackItemClick" data-data="{{item}}">
+      <view class="item">
+        <view class="detailData">{{item.startTime}}--{{item.endTime}}</view>
+        <view class="detailData">
+          <text>总里程（km）：{{item.sumMileage}}</text>
+          <text>总工时（h）：{{item.sumHour}}</text>
+          <!-- <text>{{item.sumYH}}kg</text> -->
+          <!-- <text>{{item.hundredAverageConsume}}kg/100km</text> -->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

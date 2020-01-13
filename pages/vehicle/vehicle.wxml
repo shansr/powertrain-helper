@@ -1,0 +1,123 @@
+<!--pages/vehicle/vehicle.wxml-->
+
+<view class="container">
+  <i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab key="condition" title="实时工况"> </i-tab>
+    <i-tab key="history" title="历史轨迹"></i-tab>
+    <i-tab key="statistic" title="统计"></i-tab>
+    <i-tab key="detail" title="详细"></i-tab>
+  </i-tabs>
+</view>
+<view wx:if="{{current=='condition'}}" class="condi">
+  <view class='map'>
+    <map id="myMap" markers="{{markers}}" style="height:50vh;width:100vw" latitude="{{latitude}}" longitude="{{longitude}}"></map>
+  </view>
+ 
+   <swiper indicator-dots='true' indicator-active-color="blue" indicator-color="gray">
+          <swiper-item >
+          <view class="Info">
+            <view class="Info-left">
+            <text>整车数据</text>
+            <text>制动力：{{car-bra}}</text>
+            <text>制动踏板状态：{{car-bst}}</text>
+            <text>充电状态：{{car-cha}}</text>
+            <text>总电流{{car-cur}}</text>
+            <text>DC-DC状态：{{car-dcd}}</text>
+            <text>驱动力：{{car-dri}}</text>
+            <text>加速踏板行程值0~100：{{car-gas}}</text>
+              </view>
+              <view class="Info-right">
+            <text>挡位：{{car-gea}}</text>
+            <text>累计行程：{{car-odometer}}</text>
+            <text>总电压:{{car-pre}}</text>
+            <text>绝缘电阻：{{car-res}}</text>
+            <text>运行模式：{{car-run}}</text>
+            <text>SOC：{{car-soc}}</text>
+            <text>车速：{{car-spe}}</text>
+            <text>车辆状态：{{car-sta}}</text>
+          </view>
+          </view>
+          </swiper-item>
+       <swiper-item>
+            <view class="Info">
+            <view class="Info-left">
+               <text>驱动电机数据</text>
+            <text>驱动电机序号：{{ele-mid}}</text>
+            <text>驱动电机控制器温度：{{ele-cte}}</text>
+            <text>电机控制器直流母线电流：{{ele-cur}}</text>
+            </view>
+            <view class="Info-right">
+            <text>驱动电机温度：{{ele-mte}}</text>
+            <text>电机控制器输入电压：{{ele-pre}}</text>
+            <text>驱动电机转速：{{ele-rmp}}</text>
+            <text>驱动电机状态：{{ele-sta}}</text>
+            <text>驱动电机转矩：{{ele-tor}}</text>
+            </view>
+            </view>
+          </swiper-item>
+           <swiper-item>
+            <view class="Info">
+            <view class="Info-left">
+              <text>燃料电池数据</text>
+            <text>燃料电池电流：{{cell-cur}}</text>
+            <text>高压DC-DC状态：{{cell-dcs}}</text>
+            <text>燃料电池消耗率：{{cell-flu}}</text>
+            <text>氢气最高浓度：{{cell-hde}}</text>
+            <text>氢气最高浓度传感器代号：{{cell-hds}}</text>
+            <text>氢气最高压力：{{cell-hpr}}</text>
+            </view>
+            <view class="Info-right">
+            <text>氢气最高压力传感器代号：{{cell-hps}}</text>
+            <text>氢系统中最高温度：{{cell-hte}}</text>
+            <text>氢系统中最高温度探针代号：{{cell-htp}}</text>
+            <text>燃料电池电压最小单位：{{cell-pre}}</text>
+            <text>燃料电池温度探针总数：{{cell-pnu}}</text>
+            <text>探针温度：{{cell-pls}}</text>
+            </view>
+            </view>
+          </swiper-item>
+          <swiper-item>
+          <view class="engin-info">
+            <text>GB32960发动机数据</text>
+            <text>发动机状态：{{engin-sta}}</text>
+            <text>曲轴转速0~60000rpm：{{engin-rpm}}</text>
+            <text>燃料消耗率0~600L/100km：{{engin-flu}}</text>
+          </view>
+          </swiper-item>
+      </swiper>
+           <!-- <view class="text-left">
+      <text>总电压(V)：{{zdy}}</text>
+      <text>总电流(A)：{{zdl >0 ? zdl:"充电"}}</text>
+      <text>挡位：{{dw}}</text>
+      <text>车速(km/h)：{{cs}}</text>
+      <text>绝缘电阻(kΩ)：{{jydz}}</text>
+      <text>SOC(%)：{{soc}}</text>
+      <text>电机扭矩(Nm)：{{djnj}}</text>
+    </view>
+    <view class="text-right">
+      <text>电机转速(rpm)：{{djzs}} </text>
+      <text>总行驶里程(km)：{{zxslc}}</text>
+      <!-- <text>总能耗(kg)：{{item.znh}}</text> -->
+      <!-- <text>电池电压(V)：{{dcdy}}</text>
+      <text>电机温度(℃)：{{djwd}}</text>
+      <text>控制器温度(℃)：{{kzqwd}}</text>
+      <text>氢气瓶压力(kPa)：{{qqpyl}}</text>
+    </view> --> 
+         
+</view>
+
+<view wx:elif="{{current=='detail'}}">
+  <scroll-view>
+    <view class='detail' wx:for="{{vehicleInfo}}" wx:for-index="index" wx:for-item="item" wx:key="key">
+      <i-cell-group>
+        <i-cell title="车辆类型" label="{{item.carType}}"></i-cell>
+        <i-cell title="车牌号" label="{{item.carNum}}"></i-cell>
+        <i-cell title="品牌" label="{{item.carPP}}"></i-cell>
+        <i-cell title="终端编号" label="{{item.zdbh}}"></i-cell>
+        <i-cell title="型号" label="{{item.carXH}}"></i-cell>
+        <i-cell title="VIN码" label="{{item.carVIN}}"></i-cell>
+        <!-- <i-cell title="GPS时间" label="{{item.gpsTime}}"></i-cell> -->
+      </i-cell-group>
+    </view>
+  </scroll-view>
+</view>

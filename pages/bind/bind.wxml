@@ -1,0 +1,21 @@
+<!--pages/bind/bind.wxml-->
+<view class="container">
+<view class="name">用户名</view>
+    <input type="text" placeholder="请输入用户名" maxlength="50" bindinput="nameInputChange" style="padding:8rpx;margi:8rpx"/>
+    <view class="pwd">密 码</view>
+    <input name="password" style="padding:8rpx;margi:8rpx" password='true' bindinput="pwdInputChange" bindblur="bindblur" placeholder='输入密码'></input>
+</view>
+
+<!-- <i-panel title="密码">
+    <!-- <i-input password='true' placeholder="请输入密码" maxlength="50" value='{{inputPwd}}' bindblur="bindblur" bind:change="pwdInputChange"/> -->
+<i-button bind:click="handleActive" type="primary" shape="circle">提交</i-button>
+
+<!-- <view wx:if="{{isPassWord}}">
+    <input name="password" password='true' value='{{pwd_val}}' bindblur="bindblur" placeholder='输入密码'></input>
+    
+</view> -->
+<!-- 显示 -->
+<!-- <view wx:if="{{!isPassWord}}" class='login_input login_password'>
+    <input name="password" value='{{pwd_val}}' bindblur="bindblur" placeholder='输入密码'></input>
+    <text bindtap='isShow' class='iconfont icon-htmal5icon09'></text>
+</view> -->

@@ -1,0 +1,20 @@
+/* pages/bind/bind.wxss */
+.container{
+  display: flex;
+  flex-direction: column;
+}
+.name{
+  /* font-family: '微软雅黑'; */
+  padding: 15px;
+  font-size: 14px;
+}
+.pwd{
+   /* font-family: '微软雅黑'; */
+  padding: 15px;
+  font-size: 14px;
+}
+input{
+  font-size: 13px;
+  margin-left: 3vw
+  /* font-family: '微软雅黑' */
+}

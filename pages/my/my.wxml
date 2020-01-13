@@ -1,0 +1,36 @@
+<!--pages/my/my.wxml-->
+
+
+<view wx:if="{{!hasUserInfo && canIUse}}" class="userinfo-not-login">
+  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">您未登录，点击登录！</button>
+</view>
+<view wx:else>
+  <view class="userinfo-login">
+    <block>
+      <image class="userinfo-avatar" src="{{imageUrl}}" mode="cover"></image>
+      <view class="userinfo-detail">
+        <text>{{nickName}}</text>
+        <text wx:if="{{phoneNo!=null}}">{{phoneNo}}</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- <i-panel class="my-item" title="个人">
+    <i-cell-group>
+      <i-cell title="个人信息" is-link url="/pages/dashboard/index"></i-cell>
+    </i-cell-group>
+  </i-panel> -->
+
+  <i-panel class="my-item" title="车辆">
+    <i-cell-group >
+      <i-cell title="激活码" is-link url="/pages/vehicle/code/code"></i-cell>
+      <!-- <i-cell title="车辆绑定" is-link url="/pages/dashboard/index"></i-cell> -->
+  <i-cell title="智慧云用户登录" is-link url="/pages/bind/bind"></i-cell>
+    </i-cell-group>
+  </i-panel>
+  <i-panel class="my-item" title="设置">
+    <i-cell-group >
+      <i-cell title="系统设置" is-link url="/pages/setting/setting"></i-cell>
+    </i-cell-group>
+  </i-panel>
+</view>

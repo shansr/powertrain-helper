@@ -1,0 +1,42 @@
+/* pages/history/history.wxss */
+.carIDstyle{
+  font-size: 32rpx;
+  font-weight: 70rpx;
+  margin: 30rpx;
+  line-height: 70rpx
+ 
+}
+/* .dateSelect{
+  padding: 15rpx;
+
+} */
+.carNumber{
+  margin: 8rpx 30rpx;
+  line-height: 70rpx;
+}
+.tui-picker-detail{
+  line-height: 70rpx;
+  margin: 30rpx;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx
+}
+.listStyle{
+  font-size: 32rpx;
+}
+
+.item{
+  border-bottom: 1rpx solid #eee;
+}
+.detailData{
+  /* display: block; */
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  line-height: 70rpx;
+  display: flex;
+  justify-content: space-between; 
+}
+/* .detailData text{
+  margin-right: 30rpx
+} */

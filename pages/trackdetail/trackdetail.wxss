@@ -1,0 +1,26 @@
+/* pages/trackdetail/trackdetail.wxss */
+
+page {
+  background-color: #f8f8f8;
+  height: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+}
+
+.page-body {
+  padding: 20rpx 0;
+}
+
+.map-area {
+  box-sizing: border-box;
+  padding: 0 30rpx;
+}
+
+.data-area{
+  margin-top: 40rpx;
+  box-sizing: border-box;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.20);
+  padding: 0 30rpx;
+  line-height: 70rpx
+}
+

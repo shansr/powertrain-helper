@@ -1,0 +1,21 @@
+<!-- <scroll-view> -->
+<!-- <view class="container"> -->
+<!-- <view class="title">平均能耗</view> -->
+<!-- <canvas canvas-id="columnCanvas" class="canvas" bindtouchstart="touchHandler"></canvas> -->
+<!-- <view class="title">工时</view>
+    <canvas canvas-id="columnCanvas-1" class="canvas" bindtouchstart="touchHandler"></canvas>
+    <view class="title">里程</view>
+    <canvas canvas-id="columnCanvas-2" class="canvas" bindtouchstart="touchHandler"></canvas> -->
+<!-- </view> -->
+<!-- </scroll-view> -->
+<view class="container">
+  <i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab key="time" title="工时"></i-tab>
+    <i-tab key="distance" title="里程"></i-tab>
+    <i-tab key="consumption" title="能耗"></i-tab>
+  </i-tabs>
+  <view class="canvas-container">
+    <ec-canvas ec="{{ ec }}"></ec-canvas>
+    <!-- <canvas canvas-id="columnCanvas" class="canvas"></canvas> -->
+  </view>
+</view>
