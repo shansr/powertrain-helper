@@ -1,0 +1,62 @@
+<!--pages/fleet_vehicle/fleet_vehicle.wxml-->
+<scroll-view>
+
+
+  <view wx:for="{{vehicles}}" wx:for-index="index" wx:for-item="item" wx:key="key">
+    <!-- <navigator url="{{item.url}}"> -->
+    <view class="item" bindtap="functionItemClick" data-data="{{item}}">
+      <view class="meta">
+        <view class="line1">
+          <image src="../../images/ic_plate.png"></image>
+          <text class="title1">{{item.plateCode}}</text>
+          <view class="title2" wx:if="{{item.status==1}}">
+            <image class="loc" src="../../images/ic_online.png" />
+            <text class="title">[在线]</text>
+          </view>
+          <view wx:if="{{item.status==0}}" class="title2">
+            <image class="loc" src="../../images/ic_offline.png" />
+            <text class="title">[离线]</text>
+          </view>
+          <view wx:if="{{item.status==2}}" class="title2">
+            <image class="loc" src="../../images/ic_offline.png" />
+            <text class="title">[故障]</text>
+          </view>
+          <view wx:if="{{item.status==3}}" class="title2">
+            <image class="loc" src="../../images/ic_offline.png" />
+            <text class="title">[充电]</text>
+          </view>
+        </view>
+
+        <!-- <view class="vehicle_content">
+            <view class="vehicle_item_value">
+              <text class="vehicle_item_value_value">Hello</text>
+              <text class="vehicle_item_value_title">总工时</text>
+            </view>
+            <view class="vehicle_item_value">
+              <text class="vehicle_item_value_value">Hello</text>
+              <text class="vehicle_item_value_title">总里程</text>
+            </view>
+            <view class="vehicle_item_value">
+              <text class="vehicle_item_value_value">Hello</text>
+              <text class="vehicle_item_value_title">总氢耗</text>
+            </view>
+          </view> -->
+        <!-- <view>
+            <text class="title">{{item.terminal}}</text>
+            <text class="title">{{item.vin}}</text>
+          </view> -->
+        <view class="vin_item">
+          <image src="../../images/ic_distance.png"></image>
+          <text class="title">里程：{{item.allMileage}} km</text>
+        </view>
+
+        <view class="tbox_item">
+          <image src="../../images/ic_qh.png"></image>
+          <text class="title">氢耗：{{item.zqh}} kg</text>
+        </view>
+
+      </view>
+    </view>
+    <!-- </navigator> -->
+  </view>
+</scroll-view>

@@ -1,7 +1,7 @@
 /* pages/home/home.wxss */
 
 .item {
-  display: flex;
+  /* display: flex; */
   padding: 32rpx;
   border-bottom: 1rpx solid #eee;
   cursor: pointer;
@@ -14,7 +14,7 @@
 }
 
 .item .meta {
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,15 +53,27 @@
 
 .line1 {
   display: flex;
+  /* align-items: center; */
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: center; */
+  /* justify-content: space-between; */
 }
 
+.line1 image{
+  width:56rpx;
+  height:56rpx;
+  margin: 8rpx;
+}
+
+
 .title2 {
+  /* display: inline; */
+  /* float: right; */
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  
+  align-items: center;
+  padding:8rpx;
+  /* flex-direction: row; */
+  /* align-items: flex-end; */
 }
 
 .loc {
@@ -70,7 +82,8 @@
 }
 
 .title1 {
-  font-size: 50rpx;
+  font-size: 40rpx;
+  align-items: flex-start;
 }
 
 .online {
@@ -115,4 +128,41 @@ margin: 15px
 
   /* color: #1e82d2 ;  */
 
-  /* } */ 
+  /* } */
+.vehicle_item_value{
+  width: 33vw;
+  flex-direction: column;
+  display: flex; /*设置显示样式**/
+  align-items: center; /**子view垂直居中*/
+}
+.vehicle_content{
+  padding-top: 16rpx;
+  display: flex;
+}
+.vehicle_item_value_title{
+  font-size: 40rpx;
+  
+  padding: 8rpx;
+}
+.vehicle_item_value_value{
+  color: grey;
+  padding: 8rpx;
+}
+.vin_item{
+  display: flex;
+  align-items: center; /**子view垂直居中*/
+}
+.vin_item image{
+  margin: 8rpx;
+  width:32rpx;
+  height: 32rpx;
+}
+.tbox_item{
+  display: flex;
+  align-items: center; /**子view垂直居中*/
+}
+.tbox_item image{
+  margin: 8rpx;
+  width:32rpx;
+  height: 32rpx;
+}

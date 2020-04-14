@@ -19,8 +19,7 @@ Page({
     startTime: '',
     carID: '',
     carNumber: null,
-
-// 2，时间选择器所用数据
+    // 2，时间选择器所用数据
     isPickerRender: false,
     isPickerShow: false,
     startTime: "2019-01-01 12:32:44",
@@ -29,10 +28,10 @@ Page({
       endDate: true,
       column: "second",
       dateLimit: true,
-      initStartTime: "2019-01-01 12:32:44",
-      initEndTime: "2019-12-01 12:32:44",
-      limitStartTime: "2015-05-06 12:32:44",
-      limitEndTime: "2055-05-06 12:32:44"
+      initStartTime: '', //时间选择器默认显示时间
+      initEndTime: '',
+      limitStartTime: "2015-01-01 00:00:00",
+      limitEndTime: "2055-01-01 00:00:00"
     }
   },
 
@@ -88,6 +87,7 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+
     // 获取开始时间默认值：当前时间戳毫秒级
     var timestamp = Date.parse(new Date());
     console.log('currenttimestamp', timestamp);
@@ -108,7 +108,7 @@ Page({
       endTime: currentTime,
       startTime: yesterTime,
       carID: options.carId,
-      carNumber:options.carNumber
+      carNumber: options.carNumber
     });
 
     var that = this
@@ -305,7 +305,6 @@ Page({
       var user_startTime = Date.parse(new Date(start))
       var user_endTime = Date.parse(new Date(end))
 
-      var that = this
 
       var requestData = {
         carID: this.data.carID,

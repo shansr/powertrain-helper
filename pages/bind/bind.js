@@ -1,4 +1,5 @@
 // pages/bind/bind.js
+
 var api = require('../../config/api.js');
 Page({
 
@@ -6,8 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  inputName:'',
-  inputPwd:'',
+    inputName: '',
+    inputPwd: '',
     isPassWord: true, // 切换密码显示隐藏
     pwd_val: '', // 密码值
   },
@@ -73,7 +74,7 @@ Page({
       inputName: e.detail.value
     })
   },
-  pwdInputChange(e){
+  pwdInputChange(e) {
     this.setData({
       inputPwd: e.detail.value
     })
@@ -85,17 +86,17 @@ Page({
         title: '用户名不能为空，请输入用户名',
         icon: 'none'
       })
-    } else if(this.data.inputPwd == ''){
+    } else if (this.data.inputPwd == '') {
       wx.showToast({
         title: '密码不能为空，请输入密码',
         icon: 'none'
       })
     }
-     else {
+    else {
       console.log(e)
       var userInfo = wx.getStorageSync('userInfo')
       const wxId = userInfo.unionId
-      const scId=this.data.inputName
+      const scId = this.data.inputName
       wx.request({
         url: api.Login,
         method: 'post',
@@ -104,11 +105,12 @@ Page({
           password: that.data.inputPwd,
           userType: 0
         }, success: function (e) {
+
           console.log(e)
           switch (e.statusCode) {
             case 401:
               wx.showToast({
-                title: '用户名密码错误',
+                title: '用户名和密码不匹配',
                 icon: 'none'
               })
               break;
@@ -123,13 +125,13 @@ Page({
                 success: function (e) {
                   switch (e.data.code) {
                     case 1:
-                      console.log(e.msg)
+                      console.log(e)
                       wx.showToast({
                         title: '激活成功',
                         icon: 'success'
                       })
                       wx.switchTab({
-                        url: '/pages/home/home',
+                        url: '/pages/fleet/fleet',
                       })
                       break
                     case 2:
@@ -153,29 +155,35 @@ Page({
                 }
               })
               break;
+            default:
+              wx.showToast({
+                title: e.data.message,
+                icon: 'none'
+              })
+              break
           }
-          
+
         },
-        fail:function (e){
-         wx.showToast({
-                    title:"用户名或密码错误",
-                    icon: 'none'
-                  })
+        fail: function (e) {
+          wx.showToast({
+            title: "用户名或密码错误",
+            icon: 'none'
+          })
         }
       })
-    
+
     }
   },
   // 密码框失去焦点时
-    bindblur: function (e) {
-      this.setData({
-        pwd_val: e.detail.value
-      })
-    },
-    // 密码显示隐藏
-    isShow:function(){
-        this.setData({
-          isPassWord: !this.data.isPassWord
-        })
-    },
+  bindblur: function (e) {
+    this.setData({
+      pwd_val: e.detail.value
+    })
+  },
+  // 密码显示隐藏
+  isShow: function () {
+    this.setData({
+      isPassWord: !this.data.isPassWord
+    })
+  },
 })

@@ -2,7 +2,7 @@
 <!-- <view class='carIDstyle'>车辆标识：{{carID}}</view> -->
 <!-- 查询区 -->
 <i-panel class='dateSelect'>
-<view class="carNumber"><text>车牌号码：{{carNumber}}</text></view>
+  <view class="carNumber"><text>车牌号码：{{carNumber}}</text></view>
   <view>
     <button bindtap="pickerShow" style="width:90vw;margin-top:20rpx">选择时间</button>
   </view>

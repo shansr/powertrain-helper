@@ -320,7 +320,7 @@ Component({
       }
     },
     initPick: function(initData) {
-      const date = initData.initStartTime ? new Date(initData.initStartTime.replace(/-/g, '/')): new Date();
+      const date = initData.initStartTime ? new Date(initData.initStartTime.replace(/-/g, '/')) : new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
       const endDate = initData.initEndTime ? new Date(initData.initEndTime.replace(/-/g, '/')) : new Date();
       // const startDate = new Date(date.getTime() - 1000 * 60 * 60 * 24);
       const startDate = date;

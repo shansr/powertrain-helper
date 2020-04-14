@@ -9,6 +9,7 @@ Page({
    */
   data: { //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    groups:[],
     functions: [],
     localPageindex: 1,
     localPageCount: 0,
@@ -18,9 +19,14 @@ Page({
     isActivate: true //是否激活
   },
   functionItemClick(e) {
-    app.globalData.carNumber = e.currentTarget.dataset.data.carNumber == null ? e.currentTarget.dataset.data.vin : e.currentTarget.dataset.data.carNumber
+    // console.log(e)
+    // app.globalData.carNumber = e.currentTarget.dataset.data.carNumber == null ? e.currentTarget.dataset.data.vin : e.currentTarget.dataset.data.carNumber
+    // wx.navigateTo({
+    //   url: e.currentTarget.dataset.data.url + '?carId=' + e.currentTarget.dataset.data.carId + '&carNumber=' + e.currentTarget.dataset.data.carNumber + '&vin=' + e.currentTarget.dataset.data.vin,
+    // })
     wx.navigateTo({
-      url: e.currentTarget.dataset.data.url + '?carId=' + e.currentTarget.dataset.data.carId + '&carNumber=' + e.currentTarget.dataset.data.carNumber + '&vin=' + e.currentTarget.dataset.data.vin,
+      // url: '/pages/home/home?groupId=' + e.currentTarget.dataset.groupid,
+      url: '/pages/fleet_vehicle/fleet_vehicle?groupId=' + e.currentTarget.dataset.groupid
     })
   },
 
@@ -138,103 +144,104 @@ Page({
    */
   onPullDownRefresh: function () {
     var that = this
-    wx.request({
-      url: api.GetCarList,
-      data: {
-        pageIndex: 1,
-        pageCount: 10,
-        queryType: "weChat"
-      },
-      header: {
-        token: wx.getStorageSync("token")
-      },
-      success: function (e) {
-        that.setData({
-          localPageindex: 1
-        })
-        var carArray = [];
-        for (var i = 0; i < e.data.dataOption.dataRows.length; i++) {
-          // if (e.data.dataOption.dataRows[i].carNumber!=null){
-          var obj = {
-            carNumber: e.data.dataOption.dataRows[i].carNumber == null ? e.data.dataOption.dataRows[i].vin : e.data.dataOption.dataRows[i].carNumber,
-            online: e.data.dataOption.dataRows[i].online,
-            terminal: e.data.dataOption.dataRows[i].terminal,
-            vin: e.data.dataOption.dataRows[i].vin,
-            carId: e.data.dataOption.dataRows[i].id,
-            url: '/pages/vehicle/vehicle'
-          }
-          carArray.push(obj)
-          // }
+    this.showData()
+    // wx.request({
+    //   url: api.GetCarList,
+    //   data: {
+    //     pageIndex: 1,
+    //     pageCount: 10,
+    //     queryType: "weChat"
+    //   },
+    //   header: {
+    //     token: wx.getStorageSync("token")
+    //   },
+    //   success: function (e) {
+    //     that.setData({
+    //       localPageindex: 1
+    //     })
+    //     var carArray = [];
+    //     for (var i = 0; i < e.data.dataOption.dataRows.length; i++) {
+    //       // if (e.data.dataOption.dataRows[i].carNumber!=null){
+    //       var obj = {
+    //         carNumber: e.data.dataOption.dataRows[i].carNumber == null ? e.data.dataOption.dataRows[i].vin : e.data.dataOption.dataRows[i].carNumber,
+    //         online: e.data.dataOption.dataRows[i].online,
+    //         terminal: e.data.dataOption.dataRows[i].terminal,
+    //         vin: e.data.dataOption.dataRows[i].vin,
+    //         carId: e.data.dataOption.dataRows[i].id,
+    //         url: '/pages/vehicle/vehicle'
+    //       }
+    //       carArray.push(obj)
+    //       // }
 
-        }
-        that.setData({
-          functions: carArray,
-          localPageCount: e.data.dataOption.pageCount
-        })
-        wx.stopPullDownRefresh()
-      }
-    })
+    //     }
+    //     that.setData({
+    //       functions: carArray,
+    //       localPageCount: e.data.dataOption.pageCount
+    //     })
+    //     wx.stopPullDownRefresh()
+    //   }
+    // })
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.localPageindex <= this.data.localPageCount) {
-      this.setData({
-        localPageindex: this.data.localPageindex + 1
-      })
-      wx.showLoading({
-        title: '加载中',
-      })
-      var that = this
-      wx.request({
-        url: api.GetCarList,
-        data: {
-          searchText: that.data.searchValue,
-          pageIndex: that.data.localPageindex,
-          pageCount: 10,
-          queryType: "weChat"
-        },
-        header: {
-          token: wx.getStorageSync("token")
-        },
-        success: function (e) {
-          var carArray = [];
-          for (var i = 0; i < e.data.dataOption.dataRows.length; i++) {
-            // if (e.data.dataOption.dataRows[i].carNumber !=null){
-            var obj = {
-              carNumber: e.data.dataOption.dataRows[i].carNumber == null ? e.data.dataOption.dataRows[i].vin : e.data.dataOption.dataRows[i].carNumber,
-              online: e.data.dataOption.dataRows[i].online,
-              terminal: e.data.dataOption.dataRows[i].terminal,
-              vin: e.data.dataOption.dataRows[i].vin,
-              carId: e.data.dataOption.dataRows[i].id,
-              url: '/pages/vehicle/vehicle'
-            }
-            carArray.push(obj)
-          }
-          that.setData({
-            functions: that.data.functions.concat(carArray)
-          })
-          wx.hideLoading()
-        },
-        fail: function (res) {
-          wx.hideLoading()
-          wx.showToast({
-            title: '数据异常',
-            icon: 'none',
-            duration: 2000
-          })
-        },
-        complete: function (res) { }
-      })
-    } else {
-      wx.showToast({
-        title: '没数据啦/(ㄒoㄒ)/~~',
-        icon: 'none',
-        duration: 2000
-      })
-    }
+    // if (this.data.localPageindex <= this.data.localPageCount) {
+    //   this.setData({
+    //     localPageindex: this.data.localPageindex + 1
+    //   })
+    //   wx.showLoading({
+    //     title: '加载中',
+    //   })
+    //   var that = this
+    //   wx.request({
+    //     url: api.GetCarList,
+    //     data: {
+    //       searchText: that.data.searchValue,
+    //       pageIndex: that.data.localPageindex,
+    //       pageCount: 10,
+    //       queryType: "weChat"
+    //     },
+    //     header: {
+    //       token: wx.getStorageSync("token")
+    //     },
+    //     success: function (e) {
+    //       var carArray = [];
+    //       for (var i = 0; i < e.data.dataOption.dataRows.length; i++) {
+    //         // if (e.data.dataOption.dataRows[i].carNumber !=null){
+    //         var obj = {
+    //           carNumber: e.data.dataOption.dataRows[i].carNumber == null ? e.data.dataOption.dataRows[i].vin : e.data.dataOption.dataRows[i].carNumber,
+    //           online: e.data.dataOption.dataRows[i].online,
+    //           terminal: e.data.dataOption.dataRows[i].terminal,
+    //           vin: e.data.dataOption.dataRows[i].vin,
+    //           carId: e.data.dataOption.dataRows[i].id,
+    //           url: '/pages/vehicle/vehicle'
+    //         }
+    //         carArray.push(obj)
+    //       }
+    //       that.setData({
+    //         functions: that.data.functions.concat(carArray)
+    //       })
+    //       wx.hideLoading()
+    //     },
+    //     fail: function (res) {
+    //       wx.hideLoading()
+    //       wx.showToast({
+    //         title: '数据异常',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     },
+    //     complete: function (res) { }
+    //   })
+    // } else {
+    //   wx.showToast({
+    //     title: '没数据啦/(ㄒoㄒ)/~~',
+    //     icon: 'none',
+    //     duration: 2000
+    //   })
+    // }
   },
 
   getFleet: function(){
@@ -298,6 +305,9 @@ Page({
   },
 
   showData: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     wx.request({
       url: api.Login,
@@ -308,6 +318,8 @@ Page({
         userType: 0
       },
       success: function (res) {
+        
+        console.log(res)
         var token = res.data.dataOption.token
         var userId = res.data.dataOption.userId
         wx.setStorage({
@@ -319,36 +331,60 @@ Page({
           data: userId
         })
         wx.request({
-          url: api.GetCarList,
-          data: {
-            pageIndex: 1,
-            pageCount: 10,
-            queryType: "weChat"
-          },
+          url: api.GetFleet,
+          // data: {
+          //   pageIndex: 1,
+          //   pageCount: 10,
+          //   queryType: "weChat"
+          // },
           header: {
             token: token
           },
           success: function (e) {
-            var carArray = [];
-            for (var i = 0; i < e.data.dataOption.dataRows.length; i++) {
-              // if (e.data.dataOption.dataRows[i].carNumber != null){
-              var obj = {
-                carNumber: e.data.dataOption.dataRows[i].carNumber == null ? e.data.dataOption.dataRows[i].vin : e.data.dataOption.dataRows[i].carNumber,
-                online: e.data.dataOption.dataRows[i].online,
-                terminal: e.data.dataOption.dataRows[i].terminal,
-                vin: e.data.dataOption.dataRows[i].vin,
-                carId: e.data.dataOption.dataRows[i].id,
-                url: '/pages/vehicle/vehicle'
+            wx.hideLoading()
+            wx.stopPullDownRefresh()
+            console.log('gp')
+            console.log(e)
+            var gps = []
+            for(let i = 0 ; i < e.data.dataOption.length ; i++){
+              var gp = e.data.dataOption[i]
+              var item = {
+                groupName: gp.groupName,
+                groupId: gp.groupId,
+                onlineNum: gp.onlineNum,
+                allVehicleNum: gp.allVehicleNum,
+                allMileage: gp.allMileage,
+                zqh: gp.cdzqh
               }
-              carArray.push(obj)
-              // }
+              gps.push(item)
             }
             that.setData({
-              functions: carArray,
-              localPageCount: e.data.dataOption.pageCount
+              groups: gps
             })
+            // console.log(that.data.groups)
+
+            // var carArray = [];
+            // for (var i = 0; i < e.data.dataOption.dataRows.length; i++) {
+            //   // if (e.data.dataOption.dataRows[i].carNumber != null){
+            //   var obj = {
+            //     carNumber: e.data.dataOption.dataRows[i].carNumber == null ? e.data.dataOption.dataRows[i].vin : e.data.dataOption.dataRows[i].carNumber,
+            //     online: e.data.dataOption.dataRows[i].online,
+            //     terminal: e.data.dataOption.dataRows[i].terminal,
+            //     vin: e.data.dataOption.dataRows[i].vin,
+            //     carId: e.data.dataOption.dataRows[i].id,
+            //     url: '/pages/vehicle/vehicle'
+            //   }
+            //   carArray.push(obj)
+            //   // }
+            // }
+            // that.setData({
+            //   functions: carArray,
+            //   localPageCount: e.data.dataOption.pageCount
+            // })
           },
           fail: function (e) {
+            wx.hideLoading()
+            wx.stopPullDownRefresh()
             wx.showToast({
               title: '服务器异常，请稍后再试',
               icon: 'none',
@@ -358,6 +394,7 @@ Page({
         })
       },
       fail: function (e) {
+        wx.hideLoading()
         wx.showToast({
           title: '服务器异常，请稍后再试',
           icon: 'none',

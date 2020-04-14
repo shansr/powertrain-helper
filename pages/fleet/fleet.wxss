@@ -1,0 +1,185 @@
+/* pages/home/home.wxss */
+
+.item {
+  /* display: flex; */
+  margin: 8rpx;
+  /* border-bottom: 1rpx solid #eee; */
+  cursor: pointer;
+}
+
+.item .poster {
+  width: 88rpx;
+  height: 88rpx;
+  margin: 16rpx;
+}
+
+.item .meta {
+  /* width: 100vw; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.item .meta .title {
+  display: block;
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
+}
+
+.item .meta .sub-title {
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.item .meta .text {
+  font-size: 32rpx;
+  /* font-family: 'Times New Roman' */
+}
+
+.item .meta .sub-title {
+  font-size: 28rpx;
+  color: #c0c0c0;
+}
+
+.item .meta .artists {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.item .comments {
+  font-size: 22rpx;
+  color: #c0c0c0;
+}
+
+.line1 {
+  display: flex;
+  /* align-items: center; */
+  align-items: center;
+  /* justify-content: center; */
+  /* justify-content: space-between; */
+}
+
+.line1 image{
+  width:56rpx;
+  height:56rpx;
+  margin: 8rpx;
+}
+
+
+.title2 {
+  /* display: inline; */
+  /* float: right; */
+  display: flex;
+  align-items: center;
+  padding:8rpx;
+  /* flex-direction: row; */
+  /* align-items: flex-end; */
+}
+.static_content{
+  display: flex;
+  align-items: center;
+  padding:8rpx;
+}
+
+.loc {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.title1 {
+  font-size: 40rpx;
+  align-items: flex-start;
+}
+
+.online {
+  color: green;
+}
+.line{
+  display: flex;
+  
+}
+.activate{
+  width: 50vw;
+  height: 40vh
+}
+.imagelogin{
+  width: 50vw;
+  height: 30vh;
+margin-left:20vw;
+display: flex;
+margin-top: 20vh
+}
+.imageActivate{
+width: 50vw;
+height: 30vh;
+display: flex;
+margin-left:25vw;
+margin-top: 20vh
+}
+.textLogin{
+display: flex;
+justify-content: center;
+margin: 15px
+}
+.btn {
+    border-radius: 80rpx;
+    margin: 70rpx 50rpx;
+   background-color: rgb(4, 137, 214);
+  color: white
+}
+/* button[disabled]:not([type]) { 
+
+  background-color:rgb(4, 137, 214);
+
+  /* color: #1e82d2 ;  */
+
+  /* } */
+.vehicle_item_value{
+  width: 33vw;
+  flex-direction: column;
+  display: flex; /*设置显示样式**/
+  align-items: center; /**子view垂直居中*/
+}
+.vehicle_content{
+  padding-top: 16rpx;
+  display: flex;
+}
+.vehicle_item_value_title{
+  font-size: 40rpx;
+  
+  padding: 8rpx;
+}
+.vehicle_item_value_value{
+  color: grey;
+  padding: 8rpx;
+}
+.vin_item{
+  display: flex;
+  align-items: center; /**子view垂直居中*/
+}
+.vin_item image{
+  margin: 8rpx;
+  width:40rpx;
+  height: 40rpx;
+}
+.tbox_item{
+  display: flex;
+  align-items: center; /**子view垂直居中*/
+}
+.tbox_item image{
+  margin: 8rpx;
+  width:40rpx;
+  height: 40rpx;
+}
+.item iamge{
+  width:32rpx;
+  height: 32rpx;
+}
+.tips{
+  display:flex;
+  /* align-items:center;
+  justify-content:center; */
+  margin: 32rpx;
+  font-size: 24rpx;
+  color: grey
+}

@@ -1,0 +1,49 @@
+<!--pages/home/home.wxml-->
+<!-- //以下是未登录显示内容 -->
+<view>
+  <block wx:if='{{isLogin == false}}'>
+    <image class="imagelogin" src="../../images/nologin.png"> </image>
+    <text class="textLogin">您尚未登录，请进行授权登录</text>
+    <button class='btn' disabled='{{disabled}}' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <view wx:else>请升级微信版本</view>
+  </block>
+</view>
+<!-- //以下是未激活显示内容 -->
+<view>
+  <block wx:if='{{isActivate== false && isLogin==true}}'>
+    <image class="imageActivate" src="../../images/noauth.png"> </image>
+    <text class="textLogin">您尚未激活，请选择激活方式</text>
+    <i-button bind:click="doCode" type="primary" size="large" shape="circle">激活码激活</i-button>
+    <i-button bind:click="doCount" type="primary" size="large" shape="circle">智慧云账号绑定</i-button>
+    <text class="tips">Tips:\n因小程序数据来源于潍柴智慧云平台，需使账号、激活码激活，智慧云账号、激活码可通过如下方式方式获取\n1.拨打电话0536-2298800\n2.发送fwt@weichai.com</text>
+  </block>
+</view>
+
+<!-- 以下是首页显示内容 -->
+
+<scroll-view>
+  <block wx:if='{{isActivate && isLogin}}'>
+    <!-- <input type="text" placeholder="请输入车牌号/VIN/T-BOX编码" maxlength="50" bindinput="InputChange" style="padding:16rpx;margi:16rpx " /> -->
+    <image class="line" style="height:4rpx;width:100%" src="../../images/line.jpg" />
+
+    <view wx:for="{{groups}}" wx:for-index="index" wx:for-item="item" wx:key="key">
+      <!-- <navigator url="{{item.url}}"> -->
+      <view class="item" bindtap="functionItemClick" data-groupid="{{item.groupId}}">
+        <i-card title="{{item.groupName}}" extra="{{item.onlineNum}}/{{item.allVehicleNum}}">
+          <view slot="content">
+            <view class="vin_item">
+              <image src="../../images/ic_distance.png"></image>
+              <text class="title">总里程:{{item.allMileage}}[km]</text>
+            </view>
+            <view class="tbox_item">
+              <image src="../../images/ic_qh.png"></image>
+              <text class="title">总氢耗:{{item.zqh}}[kg]</text>
+            </view>
+          </view>
+          <!-- <view slot="footer">{{item.groupId}}</view> -->
+        </i-card>
+      </view>
+      <!-- </navigator> -->
+    </view>
+  </block>
+</scroll-view>

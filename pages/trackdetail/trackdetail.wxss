@@ -15,9 +15,29 @@ page {
   box-sizing: border-box;
   padding: 0 30rpx;
 }
+/* .btn{
+  padding-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 40rpx;
+  line-height: 70rpx
+} */
+.btn {
+  padding: 20rpx ;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+ /* vertical-align: middle;  */
+}
+.btn image{
+  width: 64rpx;
+  height: 64rpx;
+  vertical-align: middle;
+}
 
 .data-area{
-  margin-top: 40rpx;
+  /* margin-top: 30rpx; */
   box-sizing: border-box;
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.20);
   padding: 0 30rpx;

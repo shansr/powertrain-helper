@@ -1,4 +1,5 @@
 // pages/vehicle/code/code.js
+var api = require('../../../config/api.js');
 var decode = require('../../../utils/decode.js');
 Page({
   /**
@@ -66,81 +67,111 @@ Page({
 
   },
   handleActive: function (e) {
-    if(this.data.inputCode == ''){
+    if (this.data.inputCode == '') {
       wx.showToast({
         title: '激活码不能为空，请输入激活码',
-        icon:'none'
+        icon: 'none'
       })
-    }else{
+    } else {
       this.activeCode()
     }
- 
+
   },
   activeCode: function (e) {
     var thisCtx = this
     var userInfo = wx.getStorageSync('userInfo')
     const rusultCode = decode.base64_decode(thisCtx.data.inputCode).split("/")
-    wx.setStorageSync('userName', rusultCode[0])
-    wx.setStorageSync('userPwd', rusultCode[1])
-    console.log(wx.getStorageSync('userName')),
-    console.log(wx.getStorageSync('userPwd'))
     const wxId = userInfo.unionId
     const scId = rusultCode[0]
-    
+
+
+
     wx.request({
-      url: 'https://wit.weichai.com/user/associateWithSc/' + wxId + "/" + scId,
-      success: function (e) {
-        switch (e.data.code) {
-          case 1:
-            console.log(e.msg)
+      url: api.Login,
+      method: 'post',
+      data: {
+        username: rusultCode[0],
+        password: rusultCode[1],
+        userType: 0
+      }, success: function (e) {
+
+        console.log(e)
+        switch (e.statusCode) {
+          case 401:
             wx.showToast({
-              title: '激活成功',
-              icon: 'success'
+              title: '激活码不正确',
+              icon: 'none',
+              duration:2000
             })
-          wx.switchTab({
-            url: '/pages/home/home',
-          })
-            break
-          case 2:
-            wx.showToast({
-              title: '无此人',
-              icon: 'none'
+            break;
+          case 200:
+            wx.setStorage({
+              key: 'token',
+              data: e.data.dataOption.token
             })
-            break
-          case 3:
-            wx.showToast({
-              title: '此码已被激活',
-              icon: 'none'
+            wx.request({
+              url: 'https://wit.weichai.com/user/associateWithSc/' + wxId + "/" + scId,
+              success: function (e) {
+                switch (e.data.code) {
+                  case 1:
+                    console.log(e.msg)
+                    wx.setStorageSync('userName', rusultCode[0])
+                    wx.setStorageSync('userPwd', rusultCode[1])
+                    console.log(wx.getStorageSync('userName')),
+                    console.log(wx.getStorageSync('userPwd'))
+                    wx.showToast({
+                      title: '激活成功',
+                      icon: 'success',
+                      duration: 2000
+                    })
+                    wx.switchTab({
+                      url: '/pages/fleet/fleet',
+                    })
+                    break
+                  case 2:
+                    wx.showToast({
+                      title: '无此人',
+                      icon: 'none'
+                    })
+                    break
+                  case 3:
+                    wx.showToast({
+                      title: '此码已被激活',
+                      icon: 'none'
+                    })
+                    break
+                  default:
+                    wx.showToast({
+                      title: e.data.msg,
+                      icon: 'none'
+                    })
+                    break
+                }
+              }
             })
-            // wx.switchTab({
-            //   url: '/pages/home/home',
-            // })
-            break
+          break
+            
           default:
             wx.showToast({
-              title: e.data.msg,
+              title: e.data.message,
               icon: 'none'
             })
             break
         }
+
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: "用户名或密码错误",
+          icon: 'none'
+        })
       }
     })
+
+
+
+   
   },
-  // getActiveCode: function (e) {
-  //   var thisCtx = this
-  //   var userInfo = wx.getStorageSync('userInfo')
-  //   wx.request({
-  //     url: 'http://localhost:8080/code/my/' + userInfo.id,
-  //     success: function (e) {
-  //       console.log(e)
-  //       if (e.data.code == 1) {
-  //         thisCtx.setData({
-  //           activeCodes: e.data.msg
-  //         })
-  //       }
-  //     }
-  //   })
-  // },
   codeInputChange(e) {
     this.setData({
       inputCode: e.detail.detail.value

@@ -4,8 +4,18 @@
 <!-- 历史轨迹地图区域 -->
 <view class="page-body">
   <view class="page-section map-area">
-    <map id="myMap" style="width: 100%; height: 600rpx;" latitude="{{latitude}}" longitude="{{longitude}}" polyline="{{polyline}}" markers="{{markers}}" show-location>
+    <map id="myMap" style="width: 100%; height: 600rpx;" latitude="{{latitude}}" longitude="{{longitude}}" polyline="{{polyline}}" markers="{{markers}}" include-points="{{polyline[0].points}}" bindcontroltap="controltap" bindmarkertap="markertap" bindregionchange="regionchange"
+      show-location>
     </map>
+    <view class="btn">
+      <!-- isplay=true,开始播放，此时应该显示pause.png; isActiveStop=true,结束播放，此时显示stop_active.png -->
+      <image catchtap="handlePlay" src='{{isPlay ? "../../images/pause.png" : "../../images/begin.png"}}' />
+      <image catchtap="endTrack" src='{{isActiveStop ? "../../images/stop_active.png" : "../../images/stop_default.png"}}' />
+      <!-- <button class='cu-btn bg-green shadow sm' bindtap='beginTrack'> 开始 </button>
+      <button class='cu-btn bg-orange shadow sm' bindtap='pauseTrack'> 暂停 </button>
+      <button class='cu-btn bg-red shadow sm' bindtap='endTrack'> 结束 </button> -->
+    </view>
+
   </view>
 
   <!-- 历史工况信息区域 -->

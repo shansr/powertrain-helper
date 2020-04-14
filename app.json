@@ -1,12 +1,15 @@
 {
   "pages": [
+    "pages/fleet/fleet",
     "pages/home/home",
     "pages/my/my",
     "pages/vehicle/vehicle",
     "pages/auth/auth",
     "pages/history/history",
     "pages/statistic/statistic",
-    "pages/bind/bind"
+    "pages/bind/bind",
+    "pages/fleet_vehicle/fleet_vehicle",
+    "pages/fault/fault"
   ],
   "permission": {
     "scope.userLocation": {
@@ -26,7 +29,7 @@
     "selectedColor": "#1296db",
     "list": [
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/fleet/fleet",
         "text": "首页",
         "iconPath": "images/ic_home.png",
         "selectedIconPath": "images/ic_home_press.png"

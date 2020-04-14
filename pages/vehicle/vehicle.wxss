@@ -50,4 +50,8 @@ swiper{
   flex-direction: column;
   justify-content: space-between;
   font-size: 30rpx;
+  margin-left: 3vw;
+}
+.title{
+  color: royalblue;
 }

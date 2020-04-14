@@ -10,9 +10,9 @@
 <!-- </scroll-view> -->
 <view class="container">
   <i-tabs current="{{ current }}" bindchange="handleChange">
-    <i-tab key="time" title="工时"></i-tab>
+    <!-- <i-tab key="time" title="工时"></i-tab> -->
     <i-tab key="distance" title="里程"></i-tab>
-    <i-tab key="consumption" title="能耗"></i-tab>
+    <i-tab key="consumption" title="氢耗"></i-tab>
   </i-tabs>
   <view class="canvas-container">
     <ec-canvas ec="{{ ec }}"></ec-canvas>

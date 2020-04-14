@@ -3,107 +3,389 @@
 <view class="container">
   <i-tabs current="{{ current }}" bindchange="handleChange">
     <i-tab key="condition" title="实时工况"> </i-tab>
-    <i-tab key="history" title="历史轨迹"></i-tab>
+    <!-- <i-tab key="history" title="历史轨迹"></i-tab> -->
     <i-tab key="statistic" title="统计"></i-tab>
-    <i-tab key="detail" title="详细"></i-tab>
+    <!-- <i-tab key="fault" title="故障信息"></i-tab> -->
+    <i-tab key="detail" title="车辆信息"></i-tab>
   </i-tabs>
 </view>
 <view wx:if="{{current=='condition'}}" class="condi">
   <view class='map'>
     <map id="myMap" markers="{{markers}}" style="height:50vh;width:100vw" latitude="{{latitude}}" longitude="{{longitude}}"></map>
   </view>
- 
-   <swiper indicator-dots='true' indicator-active-color="blue" indicator-color="gray">
-          <swiper-item >
-          <view class="Info">
-            <view class="Info-left">
-            <text>整车数据</text>
-            <text>制动力：{{car-bra}}</text>
-            <text>制动踏板状态：{{car-bst}}</text>
-            <text>充电状态：{{car-cha}}</text>
-            <text>总电流{{car-cur}}</text>
-            <text>DC-DC状态：{{car-dcd}}</text>
-            <text>驱动力：{{car-dri}}</text>
-            <text>加速踏板行程值0~100：{{car-gas}}</text>
-              </view>
-              <view class="Info-right">
-            <text>挡位：{{car-gea}}</text>
-            <text>累计行程：{{car-odometer}}</text>
-            <text>总电压:{{car-pre}}</text>
-            <text>绝缘电阻：{{car-res}}</text>
-            <text>运行模式：{{car-run}}</text>
-            <text>SOC：{{car-soc}}</text>
-            <text>车速：{{car-spe}}</text>
-            <text>车辆状态：{{car-sta}}</text>
-          </view>
-          </view>
-          </swiper-item>
-       <swiper-item>
-            <view class="Info">
-            <view class="Info-left">
-               <text>驱动电机数据</text>
-            <text>驱动电机序号：{{ele-mid}}</text>
-            <text>驱动电机控制器温度：{{ele-cte}}</text>
-            <text>电机控制器直流母线电流：{{ele-cur}}</text>
-            </view>
-            <view class="Info-right">
-            <text>驱动电机温度：{{ele-mte}}</text>
-            <text>电机控制器输入电压：{{ele-pre}}</text>
-            <text>驱动电机转速：{{ele-rmp}}</text>
-            <text>驱动电机状态：{{ele-sta}}</text>
-            <text>驱动电机转矩：{{ele-tor}}</text>
-            </view>
-            </view>
-          </swiper-item>
-           <swiper-item>
-            <view class="Info">
-            <view class="Info-left">
-              <text>燃料电池数据</text>
-            <text>燃料电池电流：{{cell-cur}}</text>
-            <text>高压DC-DC状态：{{cell-dcs}}</text>
-            <text>燃料电池消耗率：{{cell-flu}}</text>
-            <text>氢气最高浓度：{{cell-hde}}</text>
-            <text>氢气最高浓度传感器代号：{{cell-hds}}</text>
-            <text>氢气最高压力：{{cell-hpr}}</text>
-            </view>
-            <view class="Info-right">
-            <text>氢气最高压力传感器代号：{{cell-hps}}</text>
-            <text>氢系统中最高温度：{{cell-hte}}</text>
-            <text>氢系统中最高温度探针代号：{{cell-htp}}</text>
-            <text>燃料电池电压最小单位：{{cell-pre}}</text>
-            <text>燃料电池温度探针总数：{{cell-pnu}}</text>
-            <text>探针温度：{{cell-pls}}</text>
-            </view>
-            </view>
-          </swiper-item>
-          <swiper-item>
-          <view class="engin-info">
-            <text>GB32960发动机数据</text>
-            <text>发动机状态：{{engin-sta}}</text>
-            <text>曲轴转速0~60000rpm：{{engin-rpm}}</text>
-            <text>燃料消耗率0~600L/100km：{{engin-flu}}</text>
-          </view>
-          </swiper-item>
-      </swiper>
-           <!-- <view class="text-left">
-      <text>总电压(V)：{{zdy}}</text>
-      <text>总电流(A)：{{zdl >0 ? zdl:"充电"}}</text>
-      <text>挡位：{{dw}}</text>
-      <text>车速(km/h)：{{cs}}</text>
-      <text>绝缘电阻(kΩ)：{{jydz}}</text>
-      <text>SOC(%)：{{soc}}</text>
-      <text>电机扭矩(Nm)：{{djnj}}</text>
-    </view>
-    <view class="text-right">
-      <text>电机转速(rpm)：{{djzs}} </text>
-      <text>总行驶里程(km)：{{zxslc}}</text>
-      <!-- <text>总能耗(kg)：{{item.znh}}</text> -->
-      <!-- <text>电池电压(V)：{{dcdy}}</text>
-      <text>电机温度(℃)：{{djwd}}</text>
-      <text>控制器温度(℃)：{{kzqwd}}</text>
-      <text>氢气瓶压力(kPa)：{{qqpyl}}</text>
-    </view> --> 
-         
+
+  <!-- <swiper indicator-dots='true' indicator-active-color="blue" indicator-color="gray">
+    <swiper-item>
+      <view class="Info">
+        <view class="Info-left">
+          <text>整车数据</text>
+          <block wx:if="{{carbra==0}}">
+            <text>制动力:无</text>
+          </block>
+          <block wx:else="{{carbra==1}}">
+            <text>制动力:有</text>
+          </block>
+          <block wx:if="{{carbst==0}}">
+            <text>制动踏板状态:关闭</text>
+          </block>
+          <block wx:else="{{carbst==101}}">
+            <text>制动踏板状态:有效</text>
+          </block>
+          <block wx:if="{{carcha==1}}">
+            <text>充电状态:停车充电</text>
+          </block>
+          <block wx:if="{{carcha==2}}">
+            <text>充电状态:行驶充电</text>
+          </block>
+          <block wx:if="{{carcha==3}}">
+            <text>充电状态:未充电</text>
+          </block>
+          <block wx:else="{{carcha==4}}">
+            <text>充电状态:充电完成</text>
+          </block>
+          <text>总电流:{{carcur}}</text>
+          <block wx:if="{{cardcd==1}}">
+            <text>DC-DC状态:工作</text>
+          </block>
+          <block wx:else="{{cardcd==2}}">
+            <text>DC-DC状态:断开</text>
+          </block>
+
+          <block wx:if="{{cardri==0}}">
+            <text>驱动力:无</text>
+          </block>
+          <block wx:else="{{cardri==1}}">
+            <text>驱动力:有</text>
+          </block>
+
+          <text>加速踏板行程值0~100:{{cargas}}</text>
+        </view>
+        <view class="Info-right">
+          <block wx:if="{{cargea==0}}">
+            <text>挡位:空挡</text>
+          </block>
+          <block wx:if="{{cargea==13}}">
+            <text>档位:倒挡</text>
+          </block>
+          <block wx:if="{{cargea==14}}">
+            <text>档位:自动D挡</text>
+          </block>
+          <block wx:if="{{cargea==15}}">
+            <text>档位:停车P挡</text>
+          </block>
+          <block wx:else="">
+            <text>挡位:{{cargea}}</text>
+          </block>
+
+          <text>累计行程:{{carodometer}}</text>
+          <text>总电压:{{carpre}}</text>
+          <text>绝缘电阻:{{carres}}</text>
+          <block wx:if="{{carrun==1}}">
+            <text>运行模式:纯电动</text>
+          </block>
+          <block wx:if="{{carrun==2}}">
+            <text>运行模式:混动</text>
+          </block>
+          <block wx:if="{{carrun==3}}">
+            <text>运行模式:燃油</text>
+          </block>
+          <block wx:if="{{carrun==254}}">
+            <text>运行模式:异常</text>
+          </block>
+          <block wx:else="{{carrun==255}}">
+            <text>运行模式:无效</text>
+          </block>
+          <text>SOC:{{carsoc}}</text>
+          <text>车速:{{carspe}}</text>
+          <block wx:if="{{carsta==1}}">
+            <text>车辆状态:车辆启动</text>
+          </block>
+          <block wx:if="{{carsta==2}}">
+            <text>车辆状态:熄火</text>
+          </block>
+          <block wx:else="{{carsta==3}}">
+            <text>车辆状态:其他状态</text>
+          </block>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="Info">
+        <view class="Info-left">
+          <text>驱动电机数据</text>
+          <text>驱动电机序号:{{elemid}}</text>
+          <text>驱动电机控制器温度:{{electe}}</text>
+          <text>电机控制器直流母线电流:{{elecur}}</text>
+        </view>
+        <view class="Info-right">
+          <text>驱动电机温度:{{elemte}}</text>
+          <text>电机控制器输入电压:{{elepre}}</text>
+          <text>驱动电机转速:{{elermp}}</text>
+          <block wx:if="{{elesta==1}}">
+            <text>驱动电机状态:耗电</text>
+          </block>
+          <block wx:if="{{elesta==2}}">
+            <text>驱动电机状态:发电</text>
+          </block>
+          <block wx:if="{{elesta==3}}">
+            <text>驱动电机状态:关闭</text>
+          </block>
+
+          <block wx:else="{{elesta==4}}">
+            <text>驱动电机状态:准备</text>
+          </block>
+          <text>驱动电机状态:{{elesta}}</text>
+          <text>驱动电机转矩:{{eletor}}</text>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="Info">
+        <view class="Info-left">
+          <text>燃料电池数据</text>
+          <text>燃料电池电流:{{cellcur}}</text>
+          <text>高压DC-DC状态:{{celldcs}}</text>
+          <text>燃料电池消耗率:{{cellflu}}</text>
+          <text>氢气最高浓度:{{cellhde}}</text>
+          <text>氢气最高浓度传感器代号:{{cellhds}}</text>
+          <text>氢气最高压力:{{cellhpr}}</text>
+        </view>
+        <view class="Info-right">
+          <text>氢气最高压力传感器代号:{{cellhps}}</text>
+          <text>氢系统中最高温度:{{cellhte}}</text>
+          <text>氢系统中最高温度探针代号:{{cellhtp}}</text>
+          <text>燃料电池电压最小单位:{{cellpre}}</text>
+          <text>燃料电池温度探针总数:{{cellpnu}}</text>
+          <text>探针温度:{{cell-pls}}</text>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="engin-info">
+        <text>GB32960发动机数据</text>
+        <text>发动机状态:{{enginsta}}</text>
+        <text>曲轴转速0~60000rpm:{{enginrpm}}</text>
+        <text>燃料消耗率0~600L/100km:{{enginflu}}</text>
+      </view>
+    </swiper-item>
+  </swiper> -->
+
+
+
+  <swiper indicator-dots='true' indicator-active-color="blue" indicator-color="gray" class="swiper">
+    <swiper-item>
+      <view class="Info">
+        <view class="Info-left">
+          <!-- <text class="title">整车数据</text>
+
+          <block wx:if="{{carbra==0}}">
+            <text>制动力:无</text>
+          </block>
+          <block wx:else="{{carbra==1}}">
+            <text>制动力:有</text>
+          </block> -->
+          <text>驱动电机转速(r/min):{{elermp}}</text>
+          <text>车速(km/h):{{carspe}}</text>
+          <block wx:if="{{cargea==null}}">
+            <text>挡位:--</text>
+          </block>
+          <block wx:elif="{{cargea==0}}">
+            <text>挡位:空挡</text>
+          </block>
+          <block wx:elif="{{cargea==13}}">
+            <text>档位:倒挡</text>
+          </block>
+          <block wx:elif="{{cargea==14}}">
+            <text>档位:自动D挡</text>
+          </block>
+          <block wx:elif="{{cargea==15}}">
+            <text>档位:停车P挡</text>
+          </block>
+          <block wx:else="">
+            <text>挡位:{{cargea}}</text>
+          </block>
+          <text>总电流(A):{{carcur}}</text>
+          <text>总电压(V):{{carpre}}</text>
+          <text>SOC(%):{{carsoc}}</text>
+          
+          <text>电机温度(℃):{{elemte}}</text>
+          <text>控制器温度(℃):{{electe}}</text>
+          
+          <!-- <block wx:if="{{cardcd==null}}">
+            <text>DC-DC状态:--</text>
+          </block>
+          <block wx:if="{{cardcd==1}}">
+            <text>DC-DC状态:工作</text>
+          </block>
+          <block wx:else="{{cardcd==2}}">
+            <text>DC-DC状态:断开</text>
+          </block>
+          <block wx:if="{{cardri==null}}">
+            <text>驱动力:--</text>
+          </block>
+          <block wx:if="{{cardri==0}}">
+            <text>驱动力:无</text>
+          </block>
+          <block wx:else="{{cardri==1}}">
+            <text>驱动力:有</text>
+          </block> -->
+          
+          
+          
+          
+        </view>
+        <view class="Info-right">
+
+          <text>瞬时氢耗(g/s):{{ssqh}}</text>
+          <block wx:if="{{carrun==null}}">
+            <text>运行模式:--</text>
+          </block>
+          <block wx:elif="{{carrun==1}}">
+            <text>运行模式:纯电动</text>
+          </block>
+          <block wx:elif="{{carrun==2}}">
+            <text>运行模式:混动</text>
+          </block>
+          <block wx:elif="{{carrun==3}}">
+            <text>运行模式:燃油</text>
+          </block>
+          <block wx:elif="{{carrun==254}}">
+            <text>运行模式:异常</text>
+          </block>
+          <block wx:else="{{carrun==255}}">
+            <text>运行模式:无效</text>
+          </block>
+
+          <block wx:if="{{carcha==null}}">
+            <text>充电状态:--</text>
+          </block>
+          <block wx:if="{{carcha==1}}">
+            <text>充电状态:停车充电</text>
+          </block>
+          <block wx:if="{{carcha==2}}">
+            <text>充电状态:行驶充电</text>
+          </block>
+          <block wx:if="{{carcha==3}}">
+            <text>充电状态:未充电</text>
+          </block>
+          <block wx:else="{{carcha==4}}">
+            <text>充电状态:充电完成</text>
+          </block>
+          <block wx:if="{{carsta==null}}">
+            <text>车辆状态:--</text>
+          </block>
+          <block wx:elif="{{carsta==1}}">
+            <text>车辆状态:启动</text>
+          </block>
+          <block wx:elif="{{carsta==2}}">
+            <text>车辆状态:熄火</text>
+          </block>
+          <block wx:else="{{carsta==3}}">
+            <text>车辆状态:其他状态</text>
+          </block>
+          <text>电堆电压(V):{{cellpre}}</text>
+          
+          <!-- <text>电机温度(℃):{{elemte}}</text> -->
+          <!-- <text>转矩(N.m):{{eletor}}</text> -->
+          
+
+          
+          <text>加速踏板行程(%):{{cargas}}</text>
+          <block wx:if="{{carbst==0}}">
+            <text>制动踏板状态:关闭</text>
+          </block>
+          <block wx:else="{{carbst==101}}">
+            <text>制动踏板状态:有效</text>
+          </block>
+          <text>氢气最高压力(MPa):{{cellhpr}}</text>
+          <!-- <text>累计行程(km):{{carodometer}}</text> -->
+          
+          <!-- <text>绝缘电阻(Ω):{{carres}}</text> -->
+        </view>
+      </view>
+    </swiper-item>
+    <!-- <swiper-item>
+      <view class="Info">
+        <view class="Info-left">
+          <text class="title">驱动电机数据</text>
+          <text>序号:{{elemid}}</text>
+          <text>控制器温度(℃):{{electe}}</text>
+          <text>转速(r/min):{{elermp}}</text>
+          <text>控制器直流母线电流(A):{{elecur}}</text>
+        </view>
+        <view class="Info-right">
+          <text>电机温度(℃):{{elemte}}</text>
+          <text>控制器输入电压(V):{{elepre}}</text>
+
+          <block wx:if="{{elesta==null}}">
+            <text>状态:--</text>
+          </block>
+          <block wx:if="{{elesta==1}}">
+            <text>状态:耗电</text>
+          </block>
+          <block wx:elif="{{elesta==2}}">
+            <text>状态:发电</text>
+          </block>
+          <block wx:elif="{{elesta==3}}">
+            <text>状态:关闭</text>
+          </block>
+          <block wx:else="{{elesta==4}}">
+            <text>状态:准备</text>
+          </block>
+          <text>转矩(N.m):{{eletor}}</text>
+        </view>
+      </view>
+    </swiper-item> -->
+    <!-- <swiper-item>
+      <view class="Info">
+        <view class="Info-left">
+          <text class="title">燃料电池数据</text>
+          <text>电流(A):{{cellcur}}</text>
+          <text>电压(V):{{cellpre}}</text>
+          <block wx:if="{{celldcs==null}}">
+            <text>高压DC-DC状态:--</text>
+          </block>
+          <block wx:if="{{celldcs==1}}">
+            <text>高压DC-DC状态:工作</text>
+          </block>
+          <block wx:else="{{celldcs==2}}">
+            <text>高压DC-DC状态:断开</text>
+          </block>
+
+          <text>消耗率(L/km):{{cellflu}}</text>
+          <text>氢气最高浓度(mg/kg):{{cellhde}}</text>
+          <text>氢气最高浓度传感器代号:{{cellhds}}</text>
+
+        </view>
+        <view class="Info-right">
+          <text>氢气最高压力(MPa):{{cellhpr}}</text>
+          <text>氢气最高压力传感器代号:{{cellhps}}</text>
+          <text>氢系统中最高温度(℃):{{cellhte}}</text>
+          <text>氢系统中最高温度探针代号:{{cellhtp}}</text>
+
+          <text>温度探针总数:{{cellpnu}}</text>
+          <text>探针温度(℃):{{cellpnu==0?'--':cellpls}}</text>
+        </view>
+      </view>
+    </swiper-item> -->
+    <!-- <swiper-item>
+      <view class="engin-info">
+        <text class="title">GB32960发动机数据</text>
+        <block wx:if="{{enginsta==null}}">
+          <text>发动机状态:--</text>
+        </block>
+        <block wx:if="{{enginsta==1}}">
+          <text>发动机状态:启动</text>
+        </block>
+        <block wx:else="{{enginsta==2}}">
+          <text>发动机状态:关闭</text>
+        </block>
+
+        <text>曲轴转速(r/min):{{enginrpm}}</text>
+        <text>燃料消耗率(L/km):{{enginflu}}</text>
+      </view>
+    </swiper-item> -->
+  </swiper>
 </view>
 
 <view wx:elif="{{current=='detail'}}">
@@ -117,6 +399,16 @@
         <i-cell title="型号" label="{{item.carXH}}"></i-cell>
         <i-cell title="VIN码" label="{{item.carVIN}}"></i-cell>
         <!-- <i-cell title="GPS时间" label="{{item.gpsTime}}"></i-cell> -->
+      </i-cell-group>
+    </view>
+  </scroll-view>
+</view>
+<view wx:elif="{{current=='fault'}}">
+  <scroll-view>
+    <view class='detail'>
+      <i-cell-group>
+
+        <i-cell wx:for="{{faults}}" wx:for-index="index" wx:for-item="item" wx:key="key" title="{{item.faultDesc}}" label="{{item.LevelName}}"></i-cell>
       </i-cell-group>
     </view>
   </scroll-view>
