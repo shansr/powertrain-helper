@@ -165,6 +165,7 @@ Page({
 
         },
         fail: function (e) {
+          console.log(e)
           wx.showToast({
             title: "用户名或密码错误",
             icon: 'none'

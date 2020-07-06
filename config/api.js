@@ -1,6 +1,7 @@
 const urlPath ="https://gpsapp.weichai.com:8443/";
 // const urlPath="https://gps-test.weichai.com:8443/";
 const urlPath1 ="https://wit.weichai.com/";
+// const urlPath1 = "https://weichai-wit.com:18443/"
 module.exports={
   AuthLogin: urlPath1 +'wxAuth/getAuthInfo',//获取code
   AuthUserInfo: urlPath1 + 'wxAuth/decrypt', //微信登录

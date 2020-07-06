@@ -190,7 +190,6 @@ Page({
       success: function (res) {
         console.log(res)
         var content = that.data.carNumber
-        console.log(res.data.dataOption.length)
         if (res.data.dataOption.ssqh != undefined && res.data.dataOption.ssqh != null){
           that.setData({
             ssqh: parseFloat(res.data.dataOption.ssqh).toFixed(2)
@@ -198,11 +197,8 @@ Page({
         }
         //燃料电池变量不为空
         if (res.data.dataOption.fd != undefined && res.data.dataOption.fd != null) {
-          console.log("燃料电池数据")
           //燃料电池数据
           var cellInfo = JSON.parse(res.data.dataOption.fd)
-          console.log(cellInfo.pls.length)
-   
           that.setData({
 
             cellcur: parseFloat(cellInfo.cur).toFixed(1) ,
@@ -236,6 +232,7 @@ Page({
         }
         if (res.data.dataOption.vd != undefined && res.data.dataOption.vd != null) {
           var totalCarInfo = JSON.parse(res.data.dataOption.vd)
+          console.log(totalCarInfo)
           that.setData({
             //整车数据
             carbra: totalCarInfo.bra,
@@ -254,6 +251,7 @@ Page({
             carsta: totalCarInfo.sta,
             carspe: totalCarInfo.spe,
           })
+        console.log(that.data.carcha)
 
         }
         if (res.data.dataOption.ed != undefined && res.data.dataOption.ed != null) {
@@ -267,14 +265,11 @@ Page({
         }
 
         if (res.data.dataOption.pi != null && res.data.dataOption.pi != undefined) {
-          console.log("位置有")
           //位置信息
           var positionInfo = JSON.parse(res.data.dataOption.pi)
           //设置地图marker显示
           var point = util.transformFromWGSToGCJ(parseFloat(positionInfo.latitude), parseFloat(positionInfo.longtitude))
-          console.log(point)
           var content = that.data.carNumber
-          console.log(electricInfo.mid)
           that.setData({
             latitude: point.latitude,
             longitude: point.longitude,
@@ -282,14 +277,14 @@ Page({
             'markers[0].longitude': point.longitude,
             'markers[0].callout.content': content
           })
-          // console.log(that.data.monitorInfo)
+          
           wx.hideLoading()
         } else {
           console.log("位置无")
           wx.hideLoading()
 
           var content = that.data.carNumber
-          //获取用户位置信息
+          //获取用户位置信息s
           if (wx.getStorageSync('location')) {
             console.log("获取缓存位置")
             var location = wx.getStorageSync('location')
@@ -396,9 +391,10 @@ Page({
         token: wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log(res)
+        // console.log("res")
+        // console.log(res)
         var content = that.data.carNumber
-        console.log(res.data.dataOption.length)
+        //console.log(res.data.dataOption.length)
         if (res.data.dataOption.ssqh != undefined && res.data.dataOption.ssqh != null){
           that.setData({
             ssqh: parseFloat(res.data.dataOption.ssqh).toFixed(2)
@@ -406,10 +402,9 @@ Page({
         }
         //燃料电池变量不为空
         if (res.data.dataOption.fd != undefined && res.data.dataOption.fd != null) {
-          console.log("燃料电池数据")
           //燃料电池数据
           var cellInfo = JSON.parse(res.data.dataOption.fd)
-          console.log(cellInfo.pls.length)
+          //console.log(cellInfo.pls.length)
    
           that.setData({
 
@@ -475,14 +470,20 @@ Page({
         }
 
         if (res.data.dataOption.pi != null && res.data.dataOption.pi != undefined) {
-          console.log("位置有")
+          // console.log("位置有")
+          //console.log(res.data.dataOption.pi)
           //位置信息
           var positionInfo = JSON.parse(res.data.dataOption.pi)
+          // console.log('position info before parse')
+          // console.log(positionInfo)
           //设置地图marker显示
+          // console.log(parseFloat(positionInfo.latitude))
+          // console.log(parseFloat(positionInfo.longtitude))
           var point = util.transformFromWGSToGCJ(parseFloat(positionInfo.latitude), parseFloat(positionInfo.longtitude))
-          console.log(point)
+          // console.log('position info after parse')
+          // console.log(point)
           var content = that.data.carNumber
-          console.log(electricInfo.mid)
+          //console.log(electricInfo.mid)
           that.setData({
             latitude: point.latitude,
             longitude: point.longitude,
@@ -493,13 +494,13 @@ Page({
           // console.log(that.data.monitorInfo)
           wx.hideLoading()
         } else {
-          console.log("位置无")
+          // console.log("位置无")
           wx.hideLoading()
 
           var content = that.data.carNumber
           //获取用户位置信息
           if (wx.getStorageSync('location')) {
-            console.log("获取缓存位置")
+            // console.log("获取缓存位置")
             var location = wx.getStorageSync('location')
             that.setData({
               //整车数据
@@ -510,15 +511,15 @@ Page({
               'markers[0].longitude': location.longitude,
               'markers[0].callout.content': content
             })
-            console.log(that.data.markers)
+            //console.log(that.data.markers)
           } else {
-            console.log("手动获取位置")
+            // console.log("手动获取位置")
             wx.hideLoading()
 
             wx.getLocation({
               type: 'gcj02',
               success(res) {
-                console.log(res)
+                //console.log(res)
                 var location = {}
                 location.latitude = res.latitude
                 location.longitude = res.longitude
@@ -532,7 +533,7 @@ Page({
                   'markers[0].longitude': res.longitude,
                   'markers[0].callout.content': content
                 })
-                console.log(that.data.markers)
+                //console.log(that.data.markers)
               }
             })
           }
@@ -556,13 +557,13 @@ Page({
         token: wx.getStorageSync('token')
       },
       success: function (res) {
-        console.log(res.data)
+        // console.log(res.data)
         var detailInfo = []
         detailInfo.push(res.data.dataOption)
         that.setData({
           vehicleInfo: detailInfo
         })
-        console.log(that.data.vehicleInfo)
+        // console.log(that.data.vehicleInfo)
       },
       fail: function (res) {
         wx.hideLoading()

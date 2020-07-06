@@ -259,13 +259,13 @@
           <block wx:if="{{carcha==null}}">
             <text>充电状态:--</text>
           </block>
-          <block wx:if="{{carcha==1}}">
+          <block wx:elif="{{carcha==1}}">
             <text>充电状态:停车充电</text>
           </block>
-          <block wx:if="{{carcha==2}}">
+          <block wx:elif="{{carcha==2}}">
             <text>充电状态:行驶充电</text>
           </block>
-          <block wx:if="{{carcha==3}}">
+          <block wx:elif="{{carcha==3}}">
             <text>充电状态:未充电</text>
           </block>
           <block wx:else="{{carcha==4}}">
