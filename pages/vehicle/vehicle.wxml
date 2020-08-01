@@ -236,7 +236,7 @@
         </view>
         <view class="Info-right">
 
-          <text>瞬时氢耗(g/s):{{ssqh}}</text>
+          <text>瞬时氢耗(g/s):{{carrun == 1 ? 0 : ssqh}}</text>
           <block wx:if="{{carrun==null}}">
             <text>运行模式:--</text>
           </block>
