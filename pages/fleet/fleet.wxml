@@ -2,10 +2,40 @@
 <!-- //以下是未登录显示内容 -->
 <view>
   <block wx:if='{{isLogin == false}}'>
-    <image class="imagelogin" src="../../images/nologin.png"> </image>
-    <text class="textLogin">您尚未登录，请进行授权登录</text>
-    <button class='btn' disabled='{{disabled}}' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+    <image class="imagelogin" src="../../images/weichai.jpg"> </image>
+    <!-- <text class="textLogin">您尚未登录，请进行授权登录</text> -->
+<div class="grid">
+<div class="grid-item">
+<div class="row-item">
+<image class="imagelogin" src="../../images/search.png" class="item-img"/>
+<text>定位查询</text>
+</div>
+<div class="row-item">
+<image class="imagelogin" src="../../images/monitor.png" class="item-img"/>
+<text>实时监控</text>
+</div>
+</div>
+
+<div class="grid-item">
+<div class="row-item">
+<image class="imagelogin" src="../../images/mile.png" class="item-img"/>
+<text>数据统计</text>
+</div>
+<div class="row-item">
+<image class="imagelogin" src="../../images/manager.png" class="item-img"/>
+<text>车队管理</text>
+</div>
+</div>
+</div>
+ <button class='btn' disabled='{{disabled}}' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+
     <view wx:else>请升级微信版本</view>
+  <div class="grid-item">
+<div class="row-item">
+<image class="imagelogin" src="../../images/alert.png" class="item-img"/>
+<text>仅限潍柴内部人员使用</text>
+</div>
+</div>
   </block>
 </view>
 <!-- //以下是未激活显示内容 -->
