@@ -1,5 +1,32 @@
 /* pages/home/home.wxss */
+.grid{
+display: flex;
+width: 300px;
+margin: 0 auto;
+margin-top: 10px;
+flex-direction: column;
+border: solid 1px #c0c0c0;
+/* background-image: url("../../images/h2.png") */
 
+}
+.grid-item{
+  display: flex;
+  justify-content: space-around;
+  margin: 7px;
+
+}
+.row-item{
+display: flex;
+flex-direction: row;
+justify-content: center;
+}
+
+.item-img{
+  width: 18px;
+  height: 18px;
+  margin: 0 7px;
+  margin-top: 2px;
+}
 .item {
   /* display: flex; */
   margin: 8rpx;
@@ -105,9 +132,9 @@
 .imagelogin{
   width: 50vw;
   height: 30vh;
-margin-left:20vw;
+margin: 0 auto;
 display: flex;
-margin-top: 20vh
+margin-top: 5vh
 }
 .imageActivate{
 width: 50vw;
