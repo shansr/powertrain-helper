@@ -1,6 +1,8 @@
 <!--pages/fleet_vehicle/fleet_vehicle.wxml-->
 <scroll-view>
 
+  <input type="text" placeholder="请输入车牌号" maxlength="50" bindinput="inputChange" style="padding:16rpx;margin:8rpx " />
+  <view class="line" style="height:4rpx;width:100%;background:#E2E2E2" />
 
   <view wx:for="{{vehicles}}" wx:for-index="index" wx:for-item="item" wx:key="key">
     <!-- <navigator url="{{item.url}}"> -->

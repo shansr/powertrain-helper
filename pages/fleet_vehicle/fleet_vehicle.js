@@ -8,7 +8,9 @@ Page({
    */
   data: {
     groupId:'',
-    vehicles:[]
+    vehicles:[],
+    allVehicles: [],
+    searchValue: ''
   },
 
   /**
@@ -105,7 +107,8 @@ Page({
         vehs.sort(that.compare("status"))
 
         that.setData({
-          vehicles: vehs
+          vehicles: vehs,
+          allVehicles: vehs
         })
         //console.log(that.data.vehicles)
         // console.log('allZqh' + sum)
@@ -121,6 +124,43 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  inputChange(e){
+    var that = this
+    this.setData({
+      searchValue: e.detail.value
+    })
+    if(e.detail.value.length == 0){
+      this.setData({
+        vehicles: that.data.allVehicles
+      })
+    } else {
+      let filters = this.data.allVehicles.filter((item)=>{
+        return item.plateCode.toUpperCase().indexOf(e.detail.value.toUpperCase()) >= 0
+      })
+      this.setData({
+        vehicles: filters
+      })
+    }
+    
+    //console.log(filters)
+
+    // var that = this
+    // wx.request({
+    //   url: api.GetCarList,
+    //   data: {
+    //     pageIndex: 1,
+    //     pageCount: 10,
+    //     queryType: "weChat",
+    //     searchText: e.detail.value
+    //   },
+    //   header: {
+    //     token: wx.getStorageSync("token")
+    //   },
+    //   success: function (e) {
+
+    //   }
+    // })
   },
   functionItemClick(e) {
     console.log(e)

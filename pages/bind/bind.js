@@ -68,13 +68,20 @@ Page({
   onShareAppMessage: function () {
 
   },
-  nameInputChange(e) {
+  // nameInputChange(e) {
+  //   console.log(e)
+  //   this.setData({
+  //     inputName: e.detail.value
+  //   })
+  // },
+  nameBindblur(e){
     console.log(e)
     this.setData({
       inputName: e.detail.value
     })
   },
-  pwdInputChange(e) {
+  pwdBindblur(e) {
+    console.log(e.detail.value)
     this.setData({
       inputPwd: e.detail.value
     })

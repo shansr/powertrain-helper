@@ -1,9 +1,9 @@
 <!--pages/bind/bind.wxml-->
 <view class="container">
 <view class="name">用户名</view>
-    <input type="text" placeholder="请输入用户名" maxlength="50" bindinput="nameInputChange" style="padding:8rpx;margi:8rpx"/>
+    <input type="text" placeholder="请输入用户名" style="padding:8rpx;margi:8rpx" bindblur="nameBindblur"/>
     <view class="pwd">密 码</view>
-    <input name="password" style="padding:8rpx;margi:8rpx" password='true' bindinput="pwdInputChange" bindblur="bindblur" placeholder='输入密码'></input>
+    <input name="password" style="padding:8rpx;margi:8rpx" password='true' bindinput="pwdBindblur" placeholder='输入密码'></input>
 </view>
 
 <!-- <i-panel title="密码">

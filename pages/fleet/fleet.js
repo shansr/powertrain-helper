@@ -267,6 +267,7 @@ Page({
         userType: 0
       },
       success: function (res) {
+        console.log(wx.getStorageSync('userPwd'))
         var token = res.data.dataOption.token
         var userId = res.data.dataOption.userId
         wx.setStorage({
