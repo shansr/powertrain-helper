@@ -9,7 +9,7 @@ Page({
   data: {
     groupId:'',
     vehicles:[],
-    allVehicles: [],
+    onlineVehs: [],
     searchValue: ''
   },
 
@@ -82,6 +82,8 @@ Page({
         wx.hideLoading()
         console.log(e)
         wx.stopPullDownRefresh()
+        var onlineVehs = []
+        var otherVehs = []
         var vehs = []
          var sum = 0
          var sumzqh = 0
@@ -99,13 +101,25 @@ Page({
           }
           sum += it.allMileage
           sumzqh += it.zqh
-          vehs.push(item)
+          if(item.status == 1){
+            onlineVehs.push(item)
+          } else {
+            otherVehs.push(item)
+          }
         }
+        console.log(onlineVehs)
+        console.log(otherVehs)
+        onlineVehs.forEach(element => {
+          vehs.push(element)
+        });
+        otherVehs.sort(that.compare("status"))
+        otherVehs.forEach(element => {
+          vehs.push(element)
+        });
+        // vehs.push(onlineVehs)
+        // vehs.push(otherVehs)
         console.log('total mil:'+ sum)
         console.log('total zqh:' + sumzqh)
-
-        vehs.sort(that.compare("status"))
-
         that.setData({
           vehicles: vehs,
           allVehicles: vehs

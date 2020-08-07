@@ -26,7 +26,7 @@
 		"userConfirmedUseCompilerModuleSwitch": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.4",
+	"libVersion": "2.12.0",
 	"appid": "wx841e0e0d08a6f1af",
 	"projectname": "powertrain-helper",
 	"cloudfunctionTemplateRoot": "",
@@ -58,7 +58,14 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/fleet/fleet",
+					"pathName": "pages/fleet/fleet",
+					"scene": null
+				}
+			]
 		}
 	}
 }
