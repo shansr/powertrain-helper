@@ -82,8 +82,10 @@ Page({
         wx.hideLoading()
         console.log(e)
         wx.stopPullDownRefresh()
-        var onlineVehs = []
-        var otherVehs = []
+        var onlineVehs = []//在线
+        var chargingVehs = []//充电
+        var faultVehs = []//故障
+        var unlineVehs = [] //离线
         var vehs = []
          var sum = 0
          var sumzqh = 0
@@ -103,21 +105,33 @@ Page({
           sumzqh += it.zqh
           if(item.status == 1){
             onlineVehs.push(item)
-          } else {
-            otherVehs.push(item)
+          } else if(item.status == 2){
+            faultVehs.push(item)
+          } else if(item.status == 3){
+            chargingVehs.push(item)
+          }else{
+            unlineVehs.push(item)
           }
         }
-        console.log(onlineVehs)
-        console.log(otherVehs)
+        // console.log(onlineVehs)
+        // console.log(otherVehs)
+        onlineVehs.sort(that.compare("allMileage"))
         onlineVehs.forEach(element => {
           vehs.push(element)
         });
-        otherVehs.sort(that.compare("status"))
-        otherVehs.forEach(element => {
+        chargingVehs.sort(that.compare("allMileage"))
+        chargingVehs.forEach(element => {
           vehs.push(element)
         });
-        // vehs.push(onlineVehs)
-        // vehs.push(otherVehs)
+        faultVehs.sort(that.compare("allMileage"))
+        faultVehs.forEach(element => {
+          vehs.push(element)
+        });
+        unlineVehs.sort(that.compare("allMileage"))
+        unlineVehs.forEach(element => {
+          vehs.push(element)
+        });
+
         console.log('total mil:'+ sum)
         console.log('total zqh:' + sumzqh)
         that.setData({
