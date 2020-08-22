@@ -8,23 +8,31 @@
     <!-- <navigator url="{{item.url}}"> -->
     <view class="item" bindtap="functionItemClick" data-data="{{item}}">
       <view class="meta">
+      <view class="meta-left">
+        <text>{{index+1}}</text>
+      </view>
+      <view class="meta-right">
         <view class="line1">
           <image src="../../images/ic_plate.png"></image>
           <text class="title1">{{item.plateCode}}</text>
+          <!-- 在线 -->
           <view class="title2" wx:if="{{item.status==1}}">
             <image class="loc" src="../../images/ic_online.png" />
             <text class="title">[在线]</text>
           </view>
+          <!-- 离线 -->
           <view wx:if="{{item.status==0}}" class="title2">
             <image class="loc" src="../../images/ic_offline.png" />
             <text class="title">[离线]</text>
           </view>
+          <!-- 故障 -->
           <view wx:if="{{item.status==2}}" class="title2">
-            <image class="loc" src="../../images/ic_offline.png" />
-            <text class="title">[故障]</text>
+            <image class="loc" src="../../images/ic_fault_on.png" />
+            <text class="title">[在线]</text>
           </view>
+          <!-- 充电 -->
           <view wx:if="{{item.status==3}}" class="title2">
-            <image class="loc" src="../../images/ic_offline.png" />
+            <image class="loc" src="../../images/ic_charging_on.png" />
             <text class="title">[充电]</text>
           </view>
         </view>
@@ -56,7 +64,8 @@
           <image src="../../images/ic_qh.png"></image>
           <text class="title">氢耗：{{item.zqh}} kg</text>
         </view>
-
+      </view>
+       
       </view>
     </view>
     <!-- </navigator> -->

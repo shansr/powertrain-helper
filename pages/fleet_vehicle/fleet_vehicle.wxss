@@ -14,7 +14,19 @@
   margin: 16rpx;
 }
 
-.item .meta {
+.meta-left{
+  width: 100rpx;
+  height: 80rpx;
+}
+
+.meta{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.item,.meta-right {
   /* width: 100vw; */
   display: flex;
   flex-direction: column;
