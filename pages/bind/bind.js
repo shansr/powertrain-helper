@@ -127,6 +127,7 @@ Page({
                 data: e.data.dataOption.token
               })
               wx.setStorageSync('userName', that.data.inputName)
+              wx.setStorageSync('userPwd', that.data.inputPwd)
               wx.request({
                 url: 'https://wit.weichai.com/user/associateWithSc/' + wxId + "/" + scId,
                 success: function (e) {
