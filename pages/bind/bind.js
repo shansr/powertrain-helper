@@ -106,7 +106,7 @@ Page({
       const scId = this.data.inputName
       wx.request({
         url: api.Login,
-        method: 'post',
+        method: 'POST',
         data: {
           username: that.data.inputName,
           password: that.data.inputPwd,
@@ -122,10 +122,11 @@ Page({
               })
               break;
             case 200:
-              wx.setStorage({
-                key: 'token',
-                data: e.data.dataOption.token
-              })
+              // wx.setStorage({
+              //   key: 'token',
+              //   data: e.data.dataOption.token
+              // })
+              wx.setStorageSync('token', e.data.dataOption.token)
               wx.setStorageSync('userName', that.data.inputName)
               wx.setStorageSync('userPwd', that.data.inputPwd)
               wx.request({
