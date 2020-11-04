@@ -1,4 +1,5 @@
-const urlPath ="https://gpsapp.weichai.com:8443/";
+// const urlPath ="https://gpsapp.weichai.com:8443/";
+const urlPath ="https://gps.weichai.com:8443/";
 // const urlPath="https://gps-test.weichai.com:8443/";
 const urlPath1 ="https://wit.weichai.com/";
 // const urlPath1 = "https://weichai-wit.com:18443/"

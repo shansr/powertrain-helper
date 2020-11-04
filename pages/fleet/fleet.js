@@ -183,7 +183,7 @@ Page({
           fail: function (e) {
             console.log(e)
             wx.showToast({
-              title: '服务器异常，请稍后再试',
+              title: '服务器异常，请稍后再试，api:getfleet',
               icon: 'none',
               duration: 5000
             })
@@ -193,7 +193,7 @@ Page({
       fail: function (e) {
         console.log(e)
         wx.showToast({
-          title: '服务器异常，请稍后再试',
+          title: '服务器异常，请稍后再试,api:login',
           icon: 'none',
           duration: 5000
         })
@@ -261,7 +261,7 @@ Page({
             wx.hideLoading()
             wx.stopPullDownRefresh()
             wx.showToast({
-              title: '服务器异常，请稍后再试',
+              title: '服务器异常，请稍后再试，api:getfleet,showData',
               icon: 'none',
               duration: 5000
             })
@@ -272,7 +272,7 @@ Page({
         console.log(e)
         wx.hideLoading()
         wx.showToast({
-          title: '服务器异常，请稍后再试',
+          title: '服务器异常，请稍后再试，api:login,showData',
           icon: 'none',
           duration: 5000
         })
